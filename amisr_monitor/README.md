@@ -26,6 +26,22 @@ sudo update-locale LANG=es_ES.UTF-8
 - mkdir media
 Registrar la aplicacin en settings.py
 
+# Nota
+En caso el puerto se encuentre ubicado ejecutar los siguientes comandos:
+```
+(webpage_amisr_env) soporte@CI-91:~/WEBPAGE_AMISR_14/MONITOREO_AMISR/amisr_monitor$ python manage.py  runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+Error: That port is already in use.
+(webpage_amisr_env) soporte@CI-91:~/WEBPAGE_AMISR_14/MONITOREO_AMISR/amisr_monitor$ sudo lsof -i :8000
+[sudo] password for soporte: 
+COMMAND   PID    USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+python  29134 soporte    4u  IPv4 9348696      0t0  TCP localhost:8000 (LISTEN)
+(webpage_amisr_env) soporte@CI-91:~/WEBPAGE_AMISR_14/MONITOREO_AMISR/amisr_monitor$ sudo kill -9 29134
+(webpage_amisr_env) soporte@CI-91:~/WEBPAGE_AMISR_14/MONITOREO_AMISR/amisr_monitor$ python manage.py  runserver
+```
 
 
 
