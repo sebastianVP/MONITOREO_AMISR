@@ -37,11 +37,11 @@ def home(request):
         # selected_month = request.GET.get('mes', meses[0] if meses else 'Enero')
         selected_year = int(request.GET.get('anio', anios[-1] if anios.size > 0 else pd.Timestamp.now().year))
         selected_month = request.GET.get('mes', meses[-1] if len(meses) > 0 else 'Enero')
-        print("selected_year",selected_year)
-        print("selected_month",selected_month)
-
+        #print("selected_year",selected_year)
+        #print("selected_month",selected_month)
     except:
-        print("Error")
+        #print("Error")
+        pass
 
     df_filtered = df[(df['Año'] == selected_year) & (df['Mes'] == selected_month)]
     # Si el DataFrame está vacío, agregar un valor por defecto
@@ -53,9 +53,9 @@ def home(request):
             'Mes': [selected_month],
             'Año': [selected_year]
         })
-    print("STEP 2")
+    #print("STEP 2")
     #df_filtered = df[df['Mes'] == selected_month]
-    print("df_filtered",df_filtered)
+    #print("df_filtered",df_filtered)
     #   Calcular porcentaje de operación
     total_dias = df_filtered['Dia'].nunique()
     total_horas_posibles = total_dias * 24
@@ -111,8 +111,8 @@ def home(request):
     else:
         sizes = [1, 0]  # Evitar error en el gráfico si no hay datos
     plt.figure(figsize=(6, 6))
-    print("TOTAL_HORAS_POSIBLES",total_horas_posibles)
-    print("TOTAL_HORAS_GRABADAS",total_horas_grabadas)
+    #print("TOTAL_HORAS_POSIBLES",total_horas_posibles)
+    #print("TOTAL_HORAS_GRABADAS",total_horas_grabadas)
     sizes = [total_horas_grabadas, total_horas_posibles - total_horas_grabadas]
     labels = ['Almacenado', 'No Almacenado']
     colors = ['#4caf50', '#f44336']
@@ -121,28 +121,7 @@ def home(request):
     porcentaje_path = os.path.join(settings.MEDIA_ROOT, 'porcentaje_almacenamiento.png')
     plt.savefig(porcentaje_path)
     plt.close()
-    """
-    # Generar gráfico de horas grabadas
-    plt.figure(figsize=(10, 5))
-    sns.barplot(x=df_filtered['Dia'].dt.day, y=df_filtered['Horas'], hue=df_filtered['Dia'].dt.day, palette='coolwarm', legend=False)
-    plt.xlabel('Día')
-    plt.ylabel('Horas Grabadas')
-    plt.title(f'Horas Grabadas en {selected_month}')
-    #print("MEDIA_ROOT",settings.MEDIA_ROOT)
-    horas_path = os.path.join(settings.MEDIA_ROOT, 'horas_grabadas.png')
-    plt.savefig(horas_path)
-    plt.close()
-    
-    # Generar gráfico de tamaño en GB
-    plt.figure(figsize=(10, 5))
-    sns.barplot(x=df_filtered['Dia'].dt.day, y=df_filtered['Tamano_GB'], hue=df_filtered['Dia'].dt.day, palette='Blues', legend=False)
-    plt.xlabel('Día')
-    plt.ylabel('Tamaño (GB)')
-    plt.title(f'Tamaño de Datos en {selected_month}')
-    tamano_path = os.path.join(settings.MEDIA_ROOT, 'tamano_datos.png')
-    plt.savefig(tamano_path)
-    plt.close()
-    """
+
     return render(request, 'monitoring/home.html', {
         'df': df_filtered.to_dict(orient='records'), 
         'meses': meses,
