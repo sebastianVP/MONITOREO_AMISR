@@ -138,6 +138,6 @@ def descargar_csv(request,anio, mes):
     #df_filtered = df[df['Mes'] == mes]
     df_filtered = df[(df['Mes'] == mes) & (df['Año'] == int(anio))]
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = f'attachment; filename="datos_{mes}.csv"'
+    response['Content-Disposition'] = f'attachment; filename="datos_{anio}{mes}.csv"'
     df_filtered.to_csv(response, index=False)
     return response

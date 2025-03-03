@@ -95,7 +95,7 @@
     <!-- Botón de Descarga -->
     <div class="text-center mt-4">
         {% if request.GET.mes %}
-            <a href="{% url 'descargar_csv' request.GET.mes %}" class="btn btn-primary">Descargar CSV</a>
+            <a href="{% url 'descargar_csv' request.GET.anio request.GET.mes %}" class="btn btn-primary">Descargar CSV</a>
         {% endif %}
     </div>
 </div>
