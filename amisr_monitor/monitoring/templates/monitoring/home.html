@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <h5 class="text-center">Porcentaje de Almacenamiento</h5>
+                <h5 class="text-center">Porcentaje de Operacion</h5>
                 <div class="chart-container">
                     <canvas id="almacenamientoChart"></canvas>
                 </div>
@@ -215,7 +215,7 @@
             new Chart(document.getElementById('almacenamientoChart').getContext('2d'), {
                 type: 'pie',
                 data: {
-                    labels: ['Almacenado', 'No Almacenado'],
+                    labels: ['Encendido', 'Apagado'],
                     datasets: [{
                         data: [data.porcentaje_operacion, 100 - data.porcentaje_operacion],
                         backgroundColor: ['#77dd77', '#ff6961'] /* Verde pastel y rosa pastel */
