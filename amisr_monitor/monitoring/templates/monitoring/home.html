@@ -106,7 +106,41 @@
 <body>
     <div class="container py-4">
         <h2 class="text-center mb-3">Monitoreo de Datos del Radar AMISR-14</h2>
-        <hr class="title-divider"> <!-- Línea divisoria con estilo -->
+        <hr class="title-divider"> 
+        <!-- Línea divisoria con estilo -->
+        <!-- Sección de almacenamiento -->
+        <div class="card mt-4 card-custom">
+            <div class="card-body">
+                <h5 class="text-center">Estado del Almacenamiento</h5>
+                <div class="chart-container">
+                    <canvas id="almacenamientoChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <script>
+            let almacenamientoData = {{ disk_data_json|safe }};
+            
+            new Chart(document.getElementById('almacenamientoChart'), {
+                type: 'bar',
+                data: {
+                    labels: almacenamientoData.labels,
+                    datasets: [{
+                        label: 'Estado del Disco (GB)',
+                        data: almacenamientoData.values,
+                        backgroundColor: ['#42a5f5', '#ef5350', '#66bb6a', '#ffca28'],
+                        borderColor: ['#1e88e5', '#d32f2f', '#388e3c', '#ffa000'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        </script>
 
         <!-- Filtros de selección -->
         <form method="GET" class="mb-4">
@@ -146,7 +180,7 @@
             <div class="col-md-4">
                 <h5 class="text-center">Porcentaje de Operación</h5>
                 <div class="chart-container">
-                    <canvas id="almacenamientoChart"></canvas>
+                    <canvas id="operacionChart"></canvas>
                 </div>
             </div>
         </div>
@@ -212,7 +246,7 @@
                 options: chartOptions
             });
 
-            new Chart(document.getElementById('almacenamientoChart').getContext('2d'), {
+            new Chart(document.getElementById('operacionChart').getContext('2d'), {
                 type: 'pie',
                 data: {
                     labels: ['Encendido', 'Apagado'],

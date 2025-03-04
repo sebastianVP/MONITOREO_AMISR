@@ -27,8 +27,22 @@ def load_data():
     df['Año'] = df['Dia'].dt.year  # Extraer el año
     return df
 
+# Nueva función para cargar datos de almacenamiento
+def load_disk_status():
+    url = "https://raw.githubusercontent.com/sebastianVP/DATASETS_CLASE/refs/heads/main/status_disco.csv"
+    df = pd.read_csv(url)
+    return df.iloc[0]  # Tomamos solo la primera fila
+
+# Función auxiliar para limpiar y convertir valores numéricos
+def clean_numeric(value):
+    try:
+        return float(str(value).replace('%', '').strip())  # Elimina % y convierte a float
+    except ValueError:
+        return 0.0  # Si hay un error, retorna 0.0
+
 def home(request):
     df = load_data()
+    disk_status = load_disk_status()
     meses = df['Mes'].unique()
     anios = df['Año'].unique()
     print("anio",anios)
@@ -123,6 +137,17 @@ def home(request):
         'tamano': df_filtered['Tamano_GB'].tolist(),
         'porcentaje_operacion': porcentaje_operacion
     }
+
+    # Datos del almacenamiento
+    disk_data_json = {
+        'labels': ['Tamaño (GB)', 'Usado (GB)', 'Disponible (GB)', 'Porcentaje Usado'],
+        'values': [
+            clean_numeric(disk_status['Tamaño (GB)']),  # Convertir a float
+            clean_numeric(disk_status['Usado (GB)']),
+            clean_numeric(disk_status['Disponible (GB)']),
+            clean_numeric(disk_status['Porcentaje Usado'])
+        ]
+    }
     
     return render(request, 'monitoring/home.html', {
         'df': df_filtered.to_dict(orient='records'), 
@@ -130,7 +155,9 @@ def home(request):
         'anios': anios,
         'selected_year': selected_year,
         'selected_month': selected_month,
-        'data_json': json.dumps(data_json)
+        'data_json': json.dumps(data_json),
+        'disk_data_json': json.dumps(disk_data_json)
+
     })
         
         
