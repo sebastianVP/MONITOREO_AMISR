@@ -11,6 +11,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 import locale
+import json
+
 
 # Establecer el idioma español
 locale.setlocale(locale.LC_TIME, 'es_ES.utf8')
@@ -69,6 +71,7 @@ def home(request):
 
     porcentaje_operacion = (total_horas_grabadas / total_horas_posibles) * 100 if total_horas_posibles > 0 else 0
     # Generar gráfico de horas grabadas
+    """
     plt.figure(figsize=(10, 5))
     sns.set_style("darkgrid")  # Agregar estilo visual atractivo
     ax = sns.barplot(x=df_filtered['Dia'].dt.day, y=df_filtered['Horas'], palette='viridis')
@@ -102,7 +105,7 @@ def home(request):
     tamano_path = os.path.join(settings.MEDIA_ROOT, 'tamano_datos.png')
     plt.savefig(tamano_path)
     plt.close()
-
+    """
     # Generar gráfico de porcentaje de almacenamiento
     if total_horas_posibles > 0:
         almacenado = max(0, total_horas_grabadas)
@@ -110,6 +113,27 @@ def home(request):
         sizes = [almacenado, no_almacenado]
     else:
         sizes = [1, 0]  # Evitar error en el gráfico si no hay datos
+    
+    data_json = {
+        'dias': df_filtered['Dia'].dt.day.tolist(),
+        'horas': df_filtered['Horas'].tolist(),
+        'tamano': df_filtered['Tamano_GB'].tolist(),
+        'porcentaje_operacion': porcentaje_operacion
+    }
+    
+    return render(request, 'monitoring/home.html', {
+        'df': df_filtered.to_dict(orient='records'), 
+        'meses': meses,
+        'anios': anios,
+        'selected_year': selected_year,
+        'selected_month': selected_month,
+        'data_json': json.dumps(data_json)
+    })
+        
+        
+        
+        
+    """
     plt.figure(figsize=(6, 6))
     #print("TOTAL_HORAS_POSIBLES",total_horas_posibles)
     #print("TOTAL_HORAS_GRABADAS",total_horas_grabadas)
@@ -121,7 +145,7 @@ def home(request):
     porcentaje_path = os.path.join(settings.MEDIA_ROOT, 'porcentaje_almacenamiento.png')
     plt.savefig(porcentaje_path)
     plt.close()
-
+    
     return render(request, 'monitoring/home.html', {
         'df': df_filtered.to_dict(orient='records'), 
         'meses': meses,
@@ -132,6 +156,7 @@ def home(request):
         'tamano_grafico': f"{settings.MEDIA_URL}tamano_datos.png",
         'porcentaje_grafico': f"{settings.MEDIA_URL}porcentaje_almacenamiento.png"
     })
+    """
 
 def descargar_csv(request,anio, mes):
     df = load_data()
