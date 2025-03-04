@@ -207,7 +207,7 @@
                     <tbody>
                         {% for row in df %}
                             <tr>
-                                <td>{{ row.Dia }}</td>
+                                <td data-order="{{ row.Dia|date:'Y-m-d' }}">{{ row.Dia|date:"d/m/Y" }}</td>
                                 <td>{{ row.Tamano_GB }}</td>
                                 <td>{{ row.Horas }}</td>
                             </tr>
@@ -236,7 +236,11 @@
                     "info": "Mostrando página _PAGE_ de _PAGES_",
                     "infoEmpty": "No hay registros disponibles",
                     "infoFiltered": "(filtrado de _MAX_ registros totales)"
-                }
+                },
+                "columnDefs": [
+                { "type": "date", "targets": 0 }   // Indicar que la primera columna es de tipo fecha
+                ],
+                "orden": [[0, "asc"]]  // Asegurar orden ascendente por fecha
             });
         });
     </script>

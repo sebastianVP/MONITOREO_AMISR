@@ -45,7 +45,10 @@ def home(request):
         #print("Error")
         pass
 
-    df_filtered = df[(df['Año'] == selected_year) & (df['Mes'] == selected_month)]
+    #df_filtered = df[(df['Año'] == selected_year) & (df['Mes'] == selected_month)]
+    df_filtered = df[(df['Año'] == selected_year) & (df['Mes'] == selected_month)].sort_values('Dia')
+    print(df_filtered)
+
     # Si el DataFrame está vacío, agregar un valor por defecto
     if df_filtered.empty:
         df_filtered = pd.DataFrame({
