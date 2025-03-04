@@ -34,7 +34,8 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5rem;
             color: #0d47a1;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+            margin-bottom: 1rem; /* Espaciado inferior */
         }
         h5, .card-title, .form-label {
             color: #1565c0; /* Azul oscuro para subtítulos */
@@ -90,12 +91,23 @@
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             background-color: #0d47a1;
+        }
+
+        /* Línea divisoria debajo del título */
+        .title-divider {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0d47a1, #bbdefb); /* Degradado azul */
+            margin: 1.5rem 0; /* Espaciado superior e inferior */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
     </style>
 </head>
 <body>
     <div class="container py-4">
-        <h2 class="text-center mb-4">Monitoreo de Datos del Radar AMISR-14</h2>
-        
+        <h2 class="text-center mb-3">Monitoreo de Datos del Radar AMISR-14</h2>
+        <hr class="title-divider"> <!-- Línea divisoria con estilo -->
+
         <!-- Filtros de selección -->
         <form method="GET" class="mb-4">
             <div class="row g-3">
@@ -259,8 +271,8 @@
     <script>
         $(document).ready(function() {
             $('#tablaDatos').DataTable({
-                "pageLength": 10,
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                "pageLength": 5, //mostrar solo 5 registros
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
                 "language": {
                     "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No se encontraron registros",
