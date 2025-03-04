@@ -52,13 +52,54 @@
             color: #333333; /* Texto en gris oscuro */
             font-weight: bold;
         }
+
+        /* Estilo general de la tabla */
         .table-custom {
-            background-color: #ffffff; /* Fondo blanco para la tabla */
-            color: #333333; /* Texto en gris oscuro */
+            background: rgba(255, 255, 255, 0.8); /* Transparente con efecto glassmorphism */
+            color: #222222; /* Texto en gris oscuro */
+            border-radius: 12px; /* Bordes redondeados */
+            overflow: hidden;
+            backdrop-filter: blur(10px); /* Efecto de desenfoque */
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante */
         }
-        .table-custom th, .table-custom td {
-            border-color: #dddddd; /* Bordes más suaves */
+
+        /* Estilo del encabezado */
+        .table-custom th {
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Degradado morado-azul */
+            color: white;
+            text-align: center;
+            padding: 14px;
+            font-weight: bold;
         }
+
+        /* Estilo de las filas alternas */
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #eef2ff; /* Azul pastel */
+        }
+
+        .table-custom tbody tr:nth-child(odd) {
+            background-color: #f3f4f6; /* Gris claro */
+        }
+
+        /* Efecto al pasar el cursor */
+        .table-custom tbody tr:hover {
+            background-color: #dbeafe; /* Azul más intenso */
+            transition: background 0.3s;
+        }
+
+        /* Botones de paginación de DataTables */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 6px 12px;
+            margin: 2px;
+            border-radius: 8px;
+            background-color: #6a11cb;
+            color: white !important;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #
+
     </style>
 </head>
 <body>
