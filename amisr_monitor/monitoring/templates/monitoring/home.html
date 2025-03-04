@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <style>
         body {
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96); /* Degradado claro */
-            color: #333333; /* Texto principal en gris oscuro */
+            background: linear-gradient(135deg,#e3f2fd, #bbdefb); /* Degradado claro */
+            color: #212529; /* Texto principal en gris oscuro */
         }
         .card-custom {
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-            background: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
-            color: #333333; /* Texto en gris oscuro */
+            background: #ffffff; /* Fondo blanco semi-transparente */
+            color: #212529; /* Texto en gris oscuro */
         }
         .chart-container {
             width: 100%;
@@ -31,42 +31,33 @@
             justify-content: center;
         }
         h2 {
-            font-family: 'Montserrat', sans-serif; /* Fuente moderna */
-            font-size: 2.5rem; /* Tamaño más grande */
-            background: linear-gradient(45deg, #1a237e, #00bcd4); /* Degradado azul */
-            -webkit-background-clip: text; /* Aplicar degradado al texto */
-            -webkit-text-fill-color: transparent; /* Texto transparente para mostrar el degradado */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra suave */
-            animation: gradientAnimation 5s ease infinite; /* Animación del degradado */
-        }
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: #0d47a1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
         h5, .card-title, .form-label {
-            color: #1a237e; /* Azul oscuro para subtítulos */
+            color: #1565c0; /* Azul oscuro para subtítulos */
         }
         select {
             background-color: #ffffff;
-            color: #333333; /* Texto en gris oscuro */
+            color: #212529; /* Texto en gris oscuro */
             font-weight: bold;
         }
 
         /* Estilo general de la tabla */
         .table-custom {
-            background: rgba(255, 255, 255, 0.8); /* Transparente con efecto glassmorphism */
-            color: #222222; /* Texto en gris oscuro */
+            background: #ffffff; /* Transparente con efecto glassmorphism */
+            color: #212529; /* Texto en gris oscuro */
             border-radius: 12px; /* Bordes redondeados */
             overflow: hidden;
-            backdrop-filter: blur(10px); /* Efecto de desenfoque */
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* Estilo del encabezado */
         .table-custom th {
-            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Degradado morado-azul */
-            color: white;
+            background:#0d47a1; /* Degradado morado-azul */
+            color: #212529;
             text-align: center;
             padding: 14px;
             font-weight: bold;
@@ -74,16 +65,16 @@
 
         /* Estilo de las filas alternas */
         .table-custom tbody tr:nth-child(even) {
-            background-color: #eef2ff; /* Azul pastel */
+            background-color: #f0f4ff; /* Azul pastel */
         }
 
         .table-custom tbody tr:nth-child(odd) {
-            background-color: #f3f4f6; /* Gris claro */
+            background-color: #ffffff; /* Gris claro */
         }
 
         /* Efecto al pasar el cursor */
         .table-custom tbody tr:hover {
-            background-color: #dbeafe; /* Azul más intenso */
+            background-color: #bbdefb; /* Azul más intenso */
             transition: background 0.3s;
         }
 
@@ -92,14 +83,13 @@
             padding: 6px 12px;
             margin: 2px;
             border-radius: 8px;
-            background-color: #6a11cb;
+            background-color: #1565c0;
             color: white !important;
             transition: all 0.3s ease-in-out;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background-color: #
-
+            background-color: #0d47a1;
     </style>
 </head>
 <body>
