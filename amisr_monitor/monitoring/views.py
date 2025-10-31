@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from django.conf import settings
 import locale
 import json
-
+from datetime import datetime
 
 # Establecer el idioma español
 locale.setlocale(locale.LC_TIME, 'es_ES.utf8')
@@ -48,13 +48,28 @@ def home(request):
     print("anio",anios)
     #print("0",anios[0])
     print("meses",meses)
-    print("meses",meses[-1])
+    #-------- UPDATE---------
+    # Lista con el orden natural de los meses
+    orden_meses = [
+         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+         ]
+
+    # Convertir a lista para ordenarla según el orden natural
+    meses_ordenados = sorted(meses, key=lambda x: orden_meses.index(x))
+    print("meses_ordenanos",meses_ordenados)
+    #------------------------
+    #print("meses",meses[-1])
+    meses.sort()
+    
+    # Obtener año y mes actual del sistema
+    mes_actual_nombre = orden_meses[datetime.now().month - 1]
     try:
         # selected_month = request.GET.get('mes', meses[0] if meses else 'Enero')
         selected_year = int(request.GET.get('anio', anios[-1] if anios.size > 0 else pd.Timestamp.now().year))
-        selected_month = request.GET.get('mes', meses[-1] if len(meses) > 0 else 'Enero')
-        #print("selected_year",selected_year)
-        #print("selected_month",selected_month)
+        selected_month = request.GET.get('mes', mes_actual_nombre if len(meses) > 0 else 'Enero')
+        print("selected_year",selected_year)
+        print("selected_month",selected_month)
     except:
         #print("Error")
         pass
