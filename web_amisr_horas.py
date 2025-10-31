@@ -66,6 +66,7 @@ if match:
     anio_select = soup.find("select", {"id": "anio"})
 
     mes = mes_select.find("option", selected=True).text if mes_select else "Mes no encontrado"
+    print("MES: ",mes)
     anio = anio_select.find("option", selected=True).text if anio_select else "Año no encontrado"
 
     # Último día grabado
